@@ -42,7 +42,6 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
     if (user) {
         const hashedPassword = user.password;
         const isMatch = yield (0, password_1.verifyPassword)(password, hashedPassword);
-        console.log(user);
         if (isMatch) {
             const token = jsonwebtoken_1.default.sign({ userId: user._id, email: user.email, userTypeId: user.userTypeId }, process.env.JWT_SECRET, { expiresIn: '30d' });
             const userObj = user.toObject();

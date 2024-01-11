@@ -20,7 +20,6 @@ const getAllproducts = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         res.status(200).json({ success: true, data: lstProduct, message: "Products fetched successfully!" });
     }
     catch (error) {
-        console.log(error);
         res.status(404).json({ success: false, data: error, message: "Failed to fetched products" });
     }
 });
@@ -36,7 +35,6 @@ const getProductDetail = (req, res, next) => __awaiter(void 0, void 0, void 0, f
         res.status(200).json({ success: true, data: { product: product, similarProducts: similarProducts }, message: "Product Detail fetched successfully!" });
     }
     catch (error) {
-        console.log(error);
         res.status(404).json({ success: false, data: error, message: "Failed to fetched product detail" });
     }
 });
@@ -61,7 +59,6 @@ const getTrendingArrivals = (req, res, next) => __awaiter(void 0, void 0, void 0
         res.status(200).json({ success: true, data: populatedProducts, message: "Trending Arrivals fetched successfully!" });
     }
     catch (error) {
-        console.log(error);
         res.status(404).json({ success: false, data: error, message: "Failed to fetched Trending Arrivals" });
     }
 });
@@ -74,7 +71,6 @@ const getBestSeller = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         res.status(200).json({ success: true, data: lstProduct, message: "BestSeller Products fetched successfully!" });
     }
     catch (error) {
-        console.log(error);
         res.status(404).json({ success: false, data: error, message: "Failed to fetched BestSeller Products" });
     }
 });
@@ -87,7 +83,6 @@ const getPopularProducts = (req, res, next) => __awaiter(void 0, void 0, void 0,
         res.status(200).json({ success: true, data: lstProduct, message: "Popular Products fetched successfully!" });
     }
     catch (error) {
-        console.log(error);
         res.status(404).json({ success: false, data: error, message: "Failed to fetched BestSeller Products" });
     }
 });

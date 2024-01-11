@@ -19,10 +19,10 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const uri = process.env.MONGO_URL;
         yield mongoose_1.default.connect(uri);
-        console.log("Connection to Databse is successful");
+        console.log("Connection to databse is successful");
     }
     catch (error) {
-        console.log("Connection to Database is unsuccessful");
+        console.log("Connection to database is unsuccessful");
     }
 });
 exports.default = connectDB;

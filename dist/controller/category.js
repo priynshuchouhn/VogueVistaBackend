@@ -33,12 +33,10 @@ const addCategory = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             image: image,
             description: description
         });
-        console.log(category);
         const newCategory = yield category.save();
         res.status(200).json({ success: true, data: newCategory, message: 'Category added successfully!' });
     }
     catch (error) {
-        console.log(error);
         res.status(404).json({ success: false, data: error, message: 'Failed to add category!' });
     }
 });
