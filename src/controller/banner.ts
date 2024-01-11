@@ -42,7 +42,6 @@ export const addHomeBanner = async (req: Request, res: Response, next: NextFunct
         const newBanner = await banner.save()
         res.status(200).json({ success: true, data: newBanner, message: 'Banner Added successfully!' })
     } catch (error) {
-        console.log(error)
         res.status(404).json({ success: false, data: error, message: 'Banner Add failed!' })
     }
 

@@ -6,6 +6,7 @@ import auth from './routes/auth';
 import category from './routes/product/category';
 import product from './routes/product/product';
 import banner from './routes/promotionals/banner';
+import cart from './routes/product/cart';
 
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use('/api/auth', auth);
 app.use('/api/category', category);
 app.use('/api/banner', banner);
 app.use('/api/product', product);
+app.use('/api/cart', cart);
 
 connectDB().then(() => {
     app.listen(PORT, () => {

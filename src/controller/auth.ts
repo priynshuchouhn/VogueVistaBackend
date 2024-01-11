@@ -31,7 +31,6 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     if(user){
         const hashedPassword = user.password as string
         const isMatch = await verifyPassword(password, hashedPassword)
-        console.log(user)
         if(isMatch){
             const token = jwt.sign(
                 { userId: user._id, email: user.email, userTypeId: user.userTypeId },

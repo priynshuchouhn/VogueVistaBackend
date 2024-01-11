@@ -9,7 +9,6 @@ export const getAllproducts = async (req: Request, res: Response, next: NextFunc
         const lstProduct = await Product.find().populate({ path: 'category' }).exec();
         res.status(200).json({ success: true, data: lstProduct, message: "Products fetched successfully!" })
     } catch (error) {
-        console.log(error);
         res.status(404).json({ success: false, data: error, message: "Failed to fetched products" })
     }
 
@@ -24,7 +23,6 @@ export const getProductDetail = async (req: Request, res: Response, next: NextFu
             .populate({ path: 'category' }).exec();
         res.status(200).json({ success: true, data: { product: product, similarProducts: similarProducts }, message: "Product Detail fetched successfully!" })
     } catch (error) {
-        console.log(error);
         res.status(404).json({ success: false, data: error, message: "Failed to fetched product detail" })
     }
 
@@ -47,7 +45,6 @@ export const getTrendingArrivals = async (req: Request, res: Response, next: Nex
         const populatedProducts = await Product.find({ _id: { $in: productIds } }).populate('category');
         res.status(200).json({ success: true, data: populatedProducts, message: "Trending Arrivals fetched successfully!" })
     } catch (error) {
-        console.log(error);
         res.status(404).json({ success: false, data: error, message: "Failed to fetched Trending Arrivals" })
     }
 
@@ -59,7 +56,6 @@ export const getBestSeller = async (req: Request, res: Response, next: NextFunct
             .limit(5);
         res.status(200).json({ success: true, data: lstProduct, message: "BestSeller Products fetched successfully!" })
     } catch (error) {
-        console.log(error);
         res.status(404).json({ success: false, data: error, message: "Failed to fetched BestSeller Products" })
     }
 
@@ -71,7 +67,6 @@ export const getPopularProducts = async (req: Request, res: Response, next: Next
             .limit(4);
         res.status(200).json({ success: true, data: lstProduct, message: "Popular Products fetched successfully!" })
     } catch (error) {
-        console.log(error);
         res.status(404).json({ success: false, data: error, message: "Failed to fetched BestSeller Products" })
     }
 
