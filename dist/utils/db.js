@@ -22,7 +22,7 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log("Connection to database is successful");
     }
     catch (error) {
-        console.log("Connection to database is unsuccessful");
+        console.log("Connection to database is unsuccessful", error);
     }
 });
 exports.default = connectDB;
