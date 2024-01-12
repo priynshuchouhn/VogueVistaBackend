@@ -22,6 +22,17 @@ export const addToCart = async (req: IRequest, res: Response, next: NextFunction
         res.status(404).json({ success: false, data: error, message: 'Failed to add item to cart!' })
     }
 }
+export const updateCart = async (req: IRequest, res: Response, next: NextFunction) => {
+    const { cartId, quantity} = req.body;
+    const userId = req.user.userId
+    try {
+        const tempCartItem = await Cart.findOneAndUpdate({_id : cartId, userId: userId}, { $set: { quantity: quantity } }, { new: true });
+        const newCartItem = tempCartItem ? await tempCartItem.populate('product') : null;
+        res.status(200).json({ success: true, data: newCartItem, message: 'Item updated in cart successfully!' })
+    } catch (error) {
+        res.status(404).json({ success: false, data: error, message: 'Failed to update item in cart!' })
+    }
+}
 export const getCartItem = async (req: IRequest, res: Response, next: NextFunction) => {
     const userId = req.user.userId
     try {
@@ -35,7 +46,7 @@ export const deleteFromCart = async (req: IRequest, res: Response, next: NextFun
     const userId = req.user.userId
     const cartId = req.body.cartId;
     try {
-        const cart = await Cart.deleteOne({_id: cartId, userId: userId}).populate('product');
+        const cart = await Cart.deleteOne({_id: cartId, userId: userId});
         res.status(200).json({ success: true, data: true, message: 'cart item deleted successfully!' })
     } catch (error) {
         res.status(404).json({ success: false, data: error, message: 'Failed to delete cart item!' })

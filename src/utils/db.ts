@@ -8,7 +8,7 @@ const connectDB = async () => {
     try {
         const uri = process.env.MONGO_URL as string
        await mongoose.connect(uri)
-        console.log("Connection to databse is successful")
+        console.log("Connection to database is successful")
     } catch (error) {
         console.log("Connection to database is unsuccessful")   
     }

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteFromCart = exports.getCartItem = exports.addToCart = void 0;
+exports.deleteFromCart = exports.getCartItem = exports.updateCart = exports.addToCart = void 0;
 const Cart_1 = __importDefault(require("../models/Cart"));
 const addToCart = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { productId, quantity, sizeVariant } = req.body;
@@ -34,6 +34,19 @@ const addToCart = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.addToCart = addToCart;
+const updateCart = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { cartId, quantity } = req.body;
+    const userId = req.user.userId;
+    try {
+        const tempCartItem = yield Cart_1.default.findOneAndUpdate({ _id: cartId, userId: userId }, { $set: { quantity: quantity } }, { new: true });
+        const newCartItem = tempCartItem ? yield tempCartItem.populate('product') : null;
+        res.status(200).json({ success: true, data: newCartItem, message: 'Item updated in cart successfully!' });
+    }
+    catch (error) {
+        res.status(404).json({ success: false, data: error, message: 'Failed to update item in cart!' });
+    }
+});
+exports.updateCart = updateCart;
 const getCartItem = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.user.userId;
     try {
@@ -49,7 +62,7 @@ const deleteFromCart = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     const userId = req.user.userId;
     const cartId = req.body.cartId;
     try {
-        const cart = yield Cart_1.default.deleteOne({ _id: cartId, userId: userId }).populate('product');
+        const cart = yield Cart_1.default.deleteOne({ _id: cartId, userId: userId });
         res.status(200).json({ success: true, data: true, message: 'cart item deleted successfully!' });
     }
     catch (error) {
