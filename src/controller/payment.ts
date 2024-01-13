@@ -15,7 +15,7 @@ export const createPaymentIntent = async (req: Request, res: Response, next: Nex
         });
         res.status(200).json({ client_secret: paymentIntent.client_secret });
     } catch (error) {
-        console.error('Error creating PaymentIntent:', error);
+        // console.error('Error creating PaymentIntent:', error);
         res.status(500).json({ error: 'Failed to create PaymentIntent' });
     }
 }
