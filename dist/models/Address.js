@@ -24,12 +24,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const cartSchema = new mongoose_1.default.Schema({
+const addressSchema = new mongoose_1.default.Schema({
     userId: { type: mongoose_1.default.Types.ObjectId, required: true, ref: 'user' },
-    productId: { type: mongoose_1.default.Types.ObjectId, required: true },
-    product: { type: mongoose_1.default.Types.ObjectId, ref: 'product' },
-    quantity: { type: Number, required: true },
-    sizeVariant: { type: String },
+    addressType: { type: String, required: true },
+    name: { type: String, required: true },
+    phone: { type: Number, required: true },
+    addressLine1: { type: String, required: true },
+    addressLine2: { type: String },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    pincode: { type: String, required: true },
+    isDefault: { type: Boolean, required: true },
 });
-const Cart = (0, mongoose_1.model)('cart', cartSchema);
-exports.default = Cart;
+const Address = (0, mongoose_1.model)('address', addressSchema);
+exports.default = Address;

@@ -2,6 +2,7 @@ import mongoose, { model } from "mongoose";
 
 const addressSchema = new mongoose.Schema({
     userId: {type: mongoose.Types.ObjectId, required: true, ref:'user'},
+    addressType: {type: String, required: true},
     name: {type: String, required: true},
     phone: {type: Number, required: true},
     addressLine1: {type: String, required:true},
