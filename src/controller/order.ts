@@ -68,7 +68,7 @@ function generateOrderNumber() {
 }
 
 function startOrderStatusUpdateScheduler(orderId: Types.ObjectId) {
-    const intervalId: any = setInterval(() => updateOrderStatus(orderId, intervalId), 20 * 1000);
+    const intervalId: any = setInterval(() => updateOrderStatus(orderId, intervalId), 60 * 60 * 1000);
 }
 
 

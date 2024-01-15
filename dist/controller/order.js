@@ -69,7 +69,7 @@ function generateOrderNumber() {
     return orderNumber;
 }
 function startOrderStatusUpdateScheduler(orderId) {
-    const intervalId = setInterval(() => updateOrderStatus(orderId, intervalId), 20 * 1000);
+    const intervalId = setInterval(() => updateOrderStatus(orderId, intervalId), 60 * 60 * 1000);
 }
 function updateOrderStatus(orderId, intervalId) {
     return __awaiter(this, void 0, void 0, function* () {
