@@ -33,7 +33,15 @@ const orderSchema = new mongoose_1.default.Schema({
     orderStatus: { type: String, enum: ['Placed', 'In Process', 'Dispatched', 'In Transit', 'Delivered'], default: 'Placed', },
     paymentId: { type: String, required: true },
     paymentMethod: { type: String, required: true },
-    products: { type: [mongoose_1.Types.ObjectId], required: true, ref: 'product' },
+    products: [
+        {
+            productId: { type: mongoose_1.Types.ObjectId, required: true },
+            product: { type: mongoose_1.Types.ObjectId, required: true, ref: 'product' },
+            quantity: { type: Number, required: true },
+            sizeVariant: { type: String },
+            _id: false
+        }
+    ],
     discount: { type: Number },
     shippingCharges: { type: Number }
 });
