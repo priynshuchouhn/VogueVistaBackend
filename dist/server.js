@@ -14,6 +14,7 @@ const banner_1 = __importDefault(require("./routes/promotionals/banner"));
 const cart_1 = __importDefault(require("./routes/product/cart"));
 const payment_1 = __importDefault(require("./routes/payment"));
 const address_1 = __importDefault(require("./routes/user/address"));
+const order_1 = __importDefault(require("./routes/order"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
@@ -29,6 +30,7 @@ app.use('/api/product', product_1.default);
 app.use('/api/cart', cart_1.default);
 app.use('/api/payment', payment_1.default);
 app.use('/api/address', address_1.default);
+app.use('/api/order', order_1.default);
 (0, db_1.default)().then(() => {
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
