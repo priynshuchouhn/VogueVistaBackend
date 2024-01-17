@@ -3,6 +3,8 @@ import { IRequest } from "../middleware/authenticate";
 import Order from "../models/Order.model";
 import { Types } from "mongoose";
 import Product from "../models/Product";
+import { transporter } from "../utils/transporter";
+import { sendOrderConfirmationMail } from "../utils/email";
 
 
 export const getOrders = async (req: IRequest, res: Response, next: NextFunction) => {
@@ -50,7 +52,9 @@ export const addOrder = async (req: IRequest, res: Response, next: NextFunction)
         const tempOrder = await order.save();
         const orderId = tempOrder._id;
         const newOrder = await tempOrder.populate(['products.product', 'shippingAddress'])
-        startOrderStatusUpdateScheduler(orderId);
+        Object.assign(newOrder, {email : req.user.email});
+        const mail = sendOrderConfirmationMail(newOrder)
+        // startOrderStatusUpdateScheduler(orderId);
         res.status(200).json({ success: true, data: newOrder, message: 'Order placed Successfully!' });
     } catch (error) {
         res.status(404).json({ success: true, data: error, message: 'Failed to place order!' });

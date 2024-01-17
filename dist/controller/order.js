@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addOrder = exports.getOrders = void 0;
 const Order_model_1 = __importDefault(require("../models/Order.model"));
 const Product_1 = __importDefault(require("../models/Product"));
+const email_1 = require("../utils/email");
 const getOrders = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.user.userId;
     try {
@@ -52,7 +53,9 @@ const addOrder = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
         const tempOrder = yield order.save();
         const orderId = tempOrder._id;
         const newOrder = yield tempOrder.populate(['products.product', 'shippingAddress']);
-        startOrderStatusUpdateScheduler(orderId);
+        Object.assign(newOrder, { email: req.user.email });
+        const mail = (0, email_1.sendOrderConfirmationMail)(newOrder);
+        // startOrderStatusUpdateScheduler(orderId);
         res.status(200).json({ success: true, data: newOrder, message: 'Order placed Successfully!' });
     }
     catch (error) {
