@@ -5,7 +5,7 @@ import { authenticate } from '../../middleware/authenticate';
 const router = express.Router();
 
 
-router.post('/addToCart', authenticate ,addToCart);
+router.post('/add', authenticate ,addToCart);
 router.get('/list', authenticate ,getCartItem);
 router.post('/delete', authenticate ,deleteFromCart);
 router.post('/update', authenticate ,updateCart);

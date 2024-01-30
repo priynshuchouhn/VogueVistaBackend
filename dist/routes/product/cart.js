@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cart_1 = require("../../controller/cart");
 const authenticate_1 = require("../../middleware/authenticate");
 const router = express_1.default.Router();
-router.post('/addToCart', authenticate_1.authenticate, cart_1.addToCart);
+router.post('/add', authenticate_1.authenticate, cart_1.addToCart);
 router.get('/list', authenticate_1.authenticate, cart_1.getCartItem);
 router.post('/delete', authenticate_1.authenticate, cart_1.deleteFromCart);
 router.post('/update', authenticate_1.authenticate, cart_1.updateCart);
