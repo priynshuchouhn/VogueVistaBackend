@@ -27,8 +27,9 @@ export const addWishlistItem = async (req: IRequest, res: Response, next: NextFu
             productId: productId
         });
         const wishlist = await tempWishlist.save();
+        const newWishlistItem = await wishlist.populate('productId');
         if(wishlist){
-            return res.status(200).json({ success: true, data: wishlist, message: 'Wishlist items added successfully' });
+            return res.status(200).json({ success: true, data: newWishlistItem, message: 'Wishlist items added successfully' });
         }
         return res.status(404).json({ success: false, data: [], message: 'Failed to add wishlist Item' });
     } catch (error) {

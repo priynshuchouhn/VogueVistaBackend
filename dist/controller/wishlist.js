@@ -37,8 +37,9 @@ const addWishlistItem = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
             productId: productId
         });
         const wishlist = yield tempWishlist.save();
+        const newWishlistItem = yield wishlist.populate('productId');
         if (wishlist) {
-            return res.status(200).json({ success: true, data: wishlist, message: 'Wishlist items added successfully' });
+            return res.status(200).json({ success: true, data: newWishlistItem, message: 'Wishlist items added successfully' });
         }
         return res.status(404).json({ success: false, data: [], message: 'Failed to add wishlist Item' });
     }
