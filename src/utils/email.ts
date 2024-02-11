@@ -1,47 +1,56 @@
-import { transporter } from "./transporter";
+import { Queue } from "bullmq";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 
-
+const emailQueue = new Queue('email-queue', {
+  connection: {
+    host: process.env.REDIS_HOST,
+    port: +process.env.REDIS_PORT!,
+    username:process.env.REDIS_USERNAME,
+    password:process.env.REDIS_PASSWORD,
+  }
+})
 export async function sendOrderConfirmationMail(orderData: any) {
-    const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-const formattedDate = new Intl.DateTimeFormat('en-US', options).format(orderData.orderDate);
-
-    const emailOptions = {
-        from: '"Vogue Vista" <no-reply@voguevista.live>', // sender address
-        to: `${orderData.email}`, // list of receivers
-        subject: "Great News! Your Order is Confirmed and Ready to Ship! 🌟🚚", // Subject line
-        attachments: [{
-            filename: 'logo',
-            path: 'https://fcsufqb.stripocdn.email/content/guids/CABINET_dc26748751fffbdb18b33249f4a8b78b91e4d4a1a5a7ec0d1f78ce0e3c1a14ce/images/voguevistalogo.png',
-            cid: 'logo' //same cid value as in the html img src
-        },
-        {
-            filename: 'vector-art',
-            path: 'https://fcsufqb.stripocdn.email/content/guids/CABINET_54100624d621728c49155116bef5e07d/images/84141618400759579.png',
-            cid: 'vector' //same cid value as in the html img src
-        },
-        {
-            filename: 'facebook-icon',
-            path: 'https://fcsufqb.stripocdn.email/content/assets/img/social-icons/logo-black/facebook-logo-black.png',
-            cid: 'facebook' //same cid value as in the html img src
-        },
-        {
-            filename: 'twitter-icon',
-            path: 'https://fcsufqb.stripocdn.email/content/assets/img/social-icons/logo-black/x-logo-black.png',
-            cid: 'twitter' //same cid value as in the html img src
-        },
-        {
-            filename: 'instagram-icon',
-            path: 'https://fcsufqb.stripocdn.email/content/assets/img/social-icons/logo-black/instagram-logo-black.png',
-            cid: 'instagram' //same cid value as in the html img src
-        },
-        {
-            filename: 'youtube-icon',
-            path: 'https://fcsufqb.stripocdn.email/content/assets/img/social-icons/logo-black/youtube-logo-black.png',
-            cid: 'youtube' //same cid value as in the html img src
-        },
-        ],
-        html: ` <!DOCTYPE html
+  const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+  const formattedDate = new Intl.DateTimeFormat('en-US', options).format(orderData.orderDate);
+  const emailOptions = {
+    from: '"Vogue Vista" <no-reply@voguevista.live>', // sender address
+    to: `${orderData.email}`, // list of receivers
+    subject: "Great News! Your Order is Confirmed and Ready to Ship! 🌟🚚", // Subject line
+    attachments: [{
+      filename: 'logo',
+      path: 'https://fcsufqb.stripocdn.email/content/guids/CABINET_dc26748751fffbdb18b33249f4a8b78b91e4d4a1a5a7ec0d1f78ce0e3c1a14ce/images/voguevistalogo.png',
+      cid: 'logo' //same cid value as in the html img src
+    },
+    {
+      filename: 'vector-art',
+      path: 'https://fcsufqb.stripocdn.email/content/guids/CABINET_54100624d621728c49155116bef5e07d/images/84141618400759579.png',
+      cid: 'vector' //same cid value as in the html img src
+    },
+    {
+      filename: 'facebook-icon',
+      path: 'https://fcsufqb.stripocdn.email/content/assets/img/social-icons/logo-black/facebook-logo-black.png',
+      cid: 'facebook' //same cid value as in the html img src
+    },
+    {
+      filename: 'twitter-icon',
+      path: 'https://fcsufqb.stripocdn.email/content/assets/img/social-icons/logo-black/x-logo-black.png',
+      cid: 'twitter' //same cid value as in the html img src
+    },
+    {
+      filename: 'instagram-icon',
+      path: 'https://fcsufqb.stripocdn.email/content/assets/img/social-icons/logo-black/instagram-logo-black.png',
+      cid: 'instagram' //same cid value as in the html img src
+    },
+    {
+      filename: 'youtube-icon',
+      path: 'https://fcsufqb.stripocdn.email/content/assets/img/social-icons/logo-black/youtube-logo-black.png',
+      cid: 'youtube' //same cid value as in the html img src
+    },
+    ],
+    html: ` <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
       <html dir="ltr" xmlns="https://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="EN">
       
@@ -877,10 +886,6 @@ const formattedDate = new Intl.DateTimeFormat('en-US', options).format(orderData
       </body>
       
       </html>`
-    }
-    await transporter.sendMail(emailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-    });
+  }
+  await emailQueue.add(`${Date.now()}`, emailOptions) 
 }

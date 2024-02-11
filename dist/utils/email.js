@@ -8,9 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendOrderConfirmationMail = void 0;
-const transporter_1 = require("./transporter");
+const bullmq_1 = require("bullmq");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const emailQueue = new bullmq_1.Queue('email-queue', {
+    connection: {
+        host: process.env.REDIS_HOST,
+        port: +process.env.REDIS_PORT,
+        username: process.env.REDIS_USERNAME,
+        password: process.env.REDIS_PASSWORD,
+    }
+});
 function sendOrderConfirmationMail(orderData) {
     return __awaiter(this, void 0, void 0, function* () {
         const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -887,11 +900,7 @@ function sendOrderConfirmationMail(orderData) {
       
       </html>`
         };
-        yield transporter_1.transporter.sendMail(emailOptions, (error, info) => {
-            if (error) {
-                return console.log(error);
-            }
-        });
+        yield emailQueue.add(`${Date.now()}`, emailOptions);
     });
 }
 exports.sendOrderConfirmationMail = sendOrderConfirmationMail;
