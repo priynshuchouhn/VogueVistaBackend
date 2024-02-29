@@ -639,7 +639,7 @@ function sendOrderConfirmationMail(orderData) {
                                     <tr>
                                       <td align="center" style="padding:0;Margin:0"><span class="es-button-border"
                                           style="border-style:solid;border-color:#e09145;background:#e09145;border-width:2px;display:inline-block;border-radius:6px;width:auto"><a
-                                            href="" class="es-button" target="_blank"
+                                            href="https://app.voguevista.live/account/my-orders" class="es-button" target="_blank"
                                             style="mso-style-priority:100 !important;text-decoration:none !important;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;padding:10px 30px 10px 30px;display:inline-block;background:#e09145;border-radius:6px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:24px;width:auto;text-align:center;letter-spacing:0;mso-padding-alt:0;mso-border-alt:10px solid #e09145;border-left-width:30px;border-right-width:30px">TRACK
                                             ORDER STATUS</a></span></td>
                                     </tr>
@@ -796,12 +796,12 @@ function sendOrderConfirmationMail(orderData) {
                                             </td>
                                             <td align="center" valign="top" style="padding:0;Margin:0;padding-right:40px"><img
                                                 title="Instagram"
-                                                src="instagram"
+                                                src="cid:instagram"
                                                 alt="Inst" width="32" height="32"
                                                 style="display:block;font-size:14px;border:0;outline:none;text-decoration:none">
                                             </td>
                                             <td align="center" valign="top" style="padding:0;Margin:0"><img title="Youtube"
-                                                src="youtube"
+                                                src="cid:youtube"
                                                 alt="Yt" width="32" height="32"
                                                 style="display:block;font-size:14px;border:0;outline:none;text-decoration:none">
                                             </td>
