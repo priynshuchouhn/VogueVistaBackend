@@ -36,5 +36,10 @@ app.use('/api/order', order);
 connectDB().then(() => {
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
+        fetch('https://vogue-vista-other-services.onrender.com').then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
     })
 })
