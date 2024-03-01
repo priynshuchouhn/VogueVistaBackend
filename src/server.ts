@@ -34,12 +34,14 @@ app.use('/api/address', address);
 app.use('/api/order', order);
 
 connectDB().then(() => {
+    return fetch('https://vogue-vista-other-services.onrender.com')
+    
+}).then(res => {
+    console.log("Service Stated");
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
-        fetch('https://vogue-vista-other-services.onrender.com').then(res => {
-            console.log(res);
-        }).catch(err => {
-            console.log(err);
-        })
+        
     })
+}).catch(err => {
+    console.log(err);
 })

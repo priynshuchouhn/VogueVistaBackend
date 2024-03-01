@@ -34,12 +34,12 @@ app.use('/api/payment', payment_1.default);
 app.use('/api/address', address_1.default);
 app.use('/api/order', order_1.default);
 (0, db_1.default)().then(() => {
+    return fetch('https://vogue-vista-other-services.onrender.com');
+}).then(res => {
+    console.log("Service Stated");
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
-        fetch('https://vogue-vista-other-services.onrender.com').then(res => {
-            console.log(res);
-        }).catch(err => {
-            console.log(err);
-        });
     });
+}).catch(err => {
+    console.log(err);
 });
