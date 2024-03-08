@@ -37,7 +37,7 @@ connectDB().then(() => {
     return fetch('https://vogue-vista-other-services.onrender.com')
     
 }).then(res => {
-    console.log("Service Stated");
+    console.log("Services Started");
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
         

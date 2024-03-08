@@ -36,7 +36,7 @@ app.use('/api/order', order_1.default);
 (0, db_1.default)().then(() => {
     return fetch('https://vogue-vista-other-services.onrender.com');
 }).then(res => {
-    console.log("Service Stated");
+    console.log("Services Started");
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
     });

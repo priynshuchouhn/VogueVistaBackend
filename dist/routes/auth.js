@@ -8,4 +8,5 @@ const auth_1 = require("../controller/auth");
 const router = express_1.default.Router();
 router.post('/login', auth_1.login);
 router.post('/register', auth_1.register);
+router.post('/loginInWithGoogle', auth_1.loginInWithGoogle);
 exports.default = router;
