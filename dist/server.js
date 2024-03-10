@@ -11,6 +11,7 @@ const auth_1 = __importDefault(require("./routes/auth"));
 const category_1 = __importDefault(require("./routes/product/category"));
 const product_1 = __importDefault(require("./routes/product/product"));
 const banner_1 = __importDefault(require("./routes/promotionals/banner"));
+const push_notification_1 = __importDefault(require("./routes/promotionals/push-notification"));
 const cart_1 = __importDefault(require("./routes/product/cart"));
 const wishlist_1 = __importDefault(require("./routes/product/wishlist"));
 const payment_1 = __importDefault(require("./routes/payment"));
@@ -33,6 +34,7 @@ app.use('/api/wishlist', wishlist_1.default);
 app.use('/api/payment', payment_1.default);
 app.use('/api/address', address_1.default);
 app.use('/api/order', order_1.default);
+app.use('/api/promotional', push_notification_1.default);
 (0, db_1.default)().then(() => {
     return fetch('https://vogue-vista-other-services.onrender.com');
 }).then(res => {
