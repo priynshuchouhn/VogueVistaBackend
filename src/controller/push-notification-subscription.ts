@@ -14,7 +14,8 @@ export const addPushNotificationSubscription = async (req: Request, res: Respons
             }
         });
         const newSub = sub.save();
-        res.status(200).json({ success: true, data: [], message: 'Subscription added succesfully!' });
+        fetch('https://vogue-vista-other-services.onrender.com/notify')
+       return res.status(200).json({ success: true, data: [], message: 'Subscription added succesfully!' });
     } catch (error) {
         res.status(500).json({ success: false, data: [], message: 'Failed to add subscription!' });
 
