@@ -6,6 +6,10 @@ export const addPushNotificationSubscription = async (req: Request, res: Respons
     try {
 
         const { endpoint, keys } = req.body;
+        const isSubExist = await PushNotificationSubscription.find({endpoint : endpoint});
+        if(isSubExist){
+            return res.status(200).json({ success: true, data: [], message: 'Subscription Already Exists' });
+        }
         const sub = new PushNotificationSubscription({
             endpoint: endpoint,
             keys: {
@@ -13,7 +17,7 @@ export const addPushNotificationSubscription = async (req: Request, res: Respons
                 p256dh: keys.p256dh
             }
         });
-        const newSub = sub.save();
+        const newSub = await sub.save();
         fetch('https://vogue-vista-other-services.onrender.com/notify')
        return res.status(200).json({ success: true, data: [], message: 'Subscription added succesfully!' });
     } catch (error) {
