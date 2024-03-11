@@ -6,7 +6,7 @@ export const addPushNotificationSubscription = async (req: Request, res: Respons
     try {
 
         const { endpoint, keys } = req.body;
-        const isSubExist = await PushNotificationSubscription.find({endpoint : endpoint});
+        const isSubExist = await PushNotificationSubscription.findOne({endpoint : endpoint});
         if(isSubExist){
             return res.status(200).json({ success: true, data: [], message: 'Subscription Already Exists' });
         }

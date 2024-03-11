@@ -17,6 +17,10 @@ const PushNotificationSubscription_1 = __importDefault(require("../models/PushNo
 const addPushNotificationSubscription = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { endpoint, keys } = req.body;
+        const isSubExist = yield PushNotificationSubscription_1.default.findOne({ endpoint: endpoint });
+        if (isSubExist) {
+            return res.status(200).json({ success: true, data: [], message: 'Subscription Already Exists' });
+        }
         const sub = new PushNotificationSubscription_1.default({
             endpoint: endpoint,
             keys: {
@@ -24,7 +28,7 @@ const addPushNotificationSubscription = (req, res, next) => __awaiter(void 0, vo
                 p256dh: keys.p256dh
             }
         });
-        const newSub = sub.save();
+        const newSub = yield sub.save();
         fetch('https://vogue-vista-other-services.onrender.com/notify');
         return res.status(200).json({ success: true, data: [], message: 'Subscription added succesfully!' });
     }
