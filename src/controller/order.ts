@@ -102,7 +102,7 @@ export const addOrder = async (req: IRequest, res: Response, next: NextFunction)
             product.product = productDoc._id;
 
             // Update product quantity
-            await Product.findByIdAndUpdate(productId, { $inc: { quantity: -product.quantity } }, { session });
+            await Product.findByIdAndUpdate(productId, { $inc: { stockQuantity: -product.quantity } }, { session });
         }
 
         // Create and save the order
