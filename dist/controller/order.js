@@ -96,7 +96,7 @@ const addOrder = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
             }
             product.product = productDoc._id;
             // Update product quantity
-            yield Product_1.default.findByIdAndUpdate(productId, { $inc: { quantity: -product.quantity } }, { session });
+            yield Product_1.default.findByIdAndUpdate(productId, { $inc: { stockQuantity: -product.quantity } }, { session });
         }
         // Create and save the order
         const order = new Order_model_1.default({
