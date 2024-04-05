@@ -17,6 +17,7 @@ const wishlist_1 = __importDefault(require("./routes/product/wishlist"));
 const payment_1 = __importDefault(require("./routes/payment"));
 const address_1 = __importDefault(require("./routes/user/address"));
 const order_1 = __importDefault(require("./routes/order"));
+const extra_1 = require("./controller/extra");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +26,7 @@ app.use((0, cors_1.default)({
     credentials: true,
 }));
 app.use(express_1.default.json());
+app.get('/api/check', extra_1.checkServerWorking);
 app.use('/api/auth', auth_1.default);
 app.use('/api/category', category_1.default);
 app.use('/api/banner', banner_1.default);

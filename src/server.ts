@@ -12,6 +12,7 @@ import wishlist from './routes/product/wishlist';
 import payment from './routes/payment';
 import address from './routes/user/address';
 import order from './routes/order';
+import { checkServerWorking } from './controller/extra';
 
 
 dotenv.config();
@@ -24,6 +25,7 @@ app.use(cors({
 }))
 
 app.use(express.json());
+app.get('/api/check', checkServerWorking);
 app.use('/api/auth', auth);
 app.use('/api/category', category);
 app.use('/api/banner', banner);
