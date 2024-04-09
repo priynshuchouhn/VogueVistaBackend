@@ -20,7 +20,7 @@ const app = express();
 const PORT = process.env.PORT || 3000
 
 app.use(cors({
-    origin:'*',
+    origin: '*',
     credentials: true,
 }))
 
@@ -38,13 +38,14 @@ app.use('/api/order', order);
 app.use('/api/promotional', pushNotification);
 
 connectDB().then(() => {
-    return fetch('https://vogue-vista-other-services.onrender.com')
-    
-}).then(res => {
-    console.log("Services Started");
     app.listen(PORT, () => {
-        console.log(`listening on port ${PORT}`);    
+        console.log(`listening on port ${PORT}`);
     })
-}).catch(err => {
-    console.log(err);
+    return fetch('https://vogue-vista-other-services.onrender.com')
 })
+    .then(res => {
+        console.log("Services Started");
+    })
+    .catch(err => {
+        console.log(err);
+    })

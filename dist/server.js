@@ -38,12 +38,14 @@ app.use('/api/address', address_1.default);
 app.use('/api/order', order_1.default);
 app.use('/api/promotional', push_notification_1.default);
 (0, db_1.default)().then(() => {
-    return fetch('https://vogue-vista-other-services.onrender.com');
-}).then(res => {
-    console.log("Services Started");
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
     });
-}).catch(err => {
+    return fetch('https://vogue-vista-other-services.onrender.com');
+})
+    .then(res => {
+    console.log("Services Started");
+})
+    .catch(err => {
     console.log(err);
 });
