@@ -37,15 +37,19 @@ app.use('/api/address', address);
 app.use('/api/order', order);
 app.use('/api/promotional', pushNotification);
 
-connectDB().then(() => {
+connectDB().then(async () => {
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
     })
-    return fetch('https://vogue-vista-other-services.onrender.com')
+    setInterval(async () => {
+        const res = await fetch('https://api.voguevista.live/api/check')
+        const data = await res.json()
+        console.log(new Date().toISOString(), data)
+        await fetch('https://vogue-vista-other-services.onrender.com')
+    }, 60 * 1000)
+    await fetch('https://vogue-vista-other-services.onrender.com')
+    console.log("Services Started");
 })
-    .then(res => {
-        console.log("Services Started");
-    })
     .catch(err => {
         console.log(err);
     })
