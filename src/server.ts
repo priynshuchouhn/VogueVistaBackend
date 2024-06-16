@@ -41,12 +41,12 @@ connectDB().then(async () => {
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
     })
-    setInterval(async () => {
-        const res = await fetch('https://api.voguevista.live/api/check')
-        const data = await res.json()
-        console.log(new Date().toISOString(), data)
-        await fetch('https://vogue-vista-other-services.onrender.com')
-    }, 60 * 1000)
+    // setInterval(async () => {
+    //     const res = await fetch('https://api.voguevista.live/api/check')
+    //     const data = await res.json()
+    //     console.log(new Date().toISOString(), data)
+    //     await fetch('https://vogue-vista-other-services.onrender.com')
+    // }, 60 * 1000)
     await fetch('https://vogue-vista-other-services.onrender.com')
     console.log("Services Started");
 })
