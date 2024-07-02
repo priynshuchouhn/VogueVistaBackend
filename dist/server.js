@@ -50,12 +50,12 @@ app.use('/api/promotional', push_notification_1.default);
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`);
     });
-    setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield fetch('https://api.voguevista.live/api/check');
-        const data = yield res.json();
-        console.log(new Date().toISOString(), data);
-        yield fetch('https://vogue-vista-other-services.onrender.com');
-    }), 60 * 1000);
+    // setInterval(async () => {
+    //     const res = await fetch('https://api.voguevista.live/api/check')
+    //     const data = await res.json()
+    //     console.log(new Date().toISOString(), data)
+    //     await fetch('https://vogue-vista-other-services.onrender.com')
+    // }, 60 * 1000)
     yield fetch('https://vogue-vista-other-services.onrender.com');
     console.log("Services Started");
 }))
